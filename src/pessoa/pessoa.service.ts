@@ -43,20 +43,33 @@ export class PessoaService {
     
   }
 
-  localizarID(ID: string): Promise<PESSOA> {
-    return this.pessoaRepository.findOne({
+  async localizarID(ID: string): Promise<PESSOA> {
+    const objeto = await this.pessoaRepository.findOne({
       where: {
         ID,
       },
     });
+
+    if (!objeto) {
+        throw new Error(`PESSOA com ID ${ID} não encontrado`);
+    }
+
+    return objeto;
   }
 
-  localizarNome(NOME: string): Promise<PESSOA> {
-    return this.pessoaRepository.findOne({
+  async localizarNome(NOME: string): Promise<PESSOA> {
+
+    const objeto = await this.pessoaRepository.findOne({
       where: {
         NOME,
       },
     });
+
+    if (!objeto) {
+        throw new Error(`PESSOA com ID ${NOME} não encontrado`);
+    }
+
+    return objeto;
   }
 
 

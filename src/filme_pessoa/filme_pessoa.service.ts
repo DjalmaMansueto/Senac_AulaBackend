@@ -1,3 +1,4 @@
+
 import { Inject, Injectable } from "@nestjs/common";
 import { RetornoCadastroDTO } from "src/dto/retorno.dto";
 import { listaPessoaDTO } from "src/pessoa/dto/listaPessoa.dto";
@@ -65,6 +66,12 @@ export class FILME_PESSOAService {
             {IDFILME:filme.ID, IDPESSOA:pessoa.ID }
         });
 
+
+      
+          if (!retorno) {
+              throw new Error(`NÂO FOI ENCONTRADO RELAÇÃO ENTRE ${filme.NOME} E ${pessoa.NOME}`);
+          }
+      
         return retorno;
     }
 
